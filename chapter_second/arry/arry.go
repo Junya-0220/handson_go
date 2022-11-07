@@ -64,3 +64,13 @@ func Insert(a []int, v int, p int) []int {
 func Remove(a []int, p int) []int {
 	return append(a[:p], a[p+1:]...)
 }
+
+// 最後に追加 変数=push(スライス,値)
+func Spush(a []string, v string) ([]string, int) {
+	return append(a, v), len(a)
+}
+
+// 最後を削除 変数=push(スライス)
+func Spop(a []string) ([]string, string) {
+	return a[:len(a)-1], a[len(a)-1]
+}
