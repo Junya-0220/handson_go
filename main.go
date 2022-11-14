@@ -22,8 +22,13 @@ func(md *MyData) PrintData() {
 	fmt.Println("Data: " , md.Data)
 }
 
-func main() {
-	var ob MyData = MyData{}
-	ob.Initial("Sachiko",[]int{10,29,59})
-	ob.PrintData()
+func(md *MyData) Check() {
+	fmt.Printf("Check [%s]", md.Name)
 }
+
+func main() {
+	var ob Data = new(MyData)
+	ob.Initial("Sachiko",[]int{2,3,90})
+	ob.PrintData()
+	ob.Check()
+	}
