@@ -2,31 +2,28 @@ package main
 
 import "fmt"
 
-type Person struct {
-	name string
-	gender string
-	age int
+type Data interface {
+	Initial(name string, data[]int)
+	PrintData()
 }
 
-func main(){
-	var maria *Person = newPerson("maria","female",29)
-	fmt.Println(*maria)
-	maria.transformGender()
-	fmt.Println(*maria)
+type MyData struct {
+	Name string
+	Data []int
 }
 
-func newPerson(n,g string, a int) *Person {
-	person := new(Person)
-	person.name = n
-	person.gender = g
-	person.age = a
-	return person
+func(md *MyData) Initial(name string, data[]int) {
+	md.Name = name
+	md.Data = data
 }
 
-func (p *Person) transformGender() {
-	if p.gender == "male"{
-		p.gender = "female"
-	}else if p.gender == "female"{
-		p.gender = "male"
-	}
+func(md *MyData) PrintData() {
+	fmt.Println("Name: " , md.Name)
+	fmt.Println("Data: " , md.Data)
+}
+
+func main() {
+	var ob MyData = MyData{}
+	ob.Initial("Sachiko",[]int{10,29,59})
+	ob.PrintData()
 }
