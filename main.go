@@ -1,25 +1,32 @@
 package main
 
-import (
-	"fmt"
-	"handson_go/chapter_second/arry"
-)
+import "fmt"
 
-func main(){
-	a:= []int{10,20,30}
-	fmt.Println(a)
-	a = arry.Push(a,1000)
-	fmt.Println(a)
-	a = arry.Pop(a)
-	fmt.Println(a)
-	a = arry.Unshift(a,90)
-	fmt.Println(a)
-	a = arry.Shift(a,500)
-	fmt.Println(a)
-	a = arry.Insert(a,400,2)
-	fmt.Println(a)
-	a = arry.Remove(a,2)
-	fmt.Println(a)
+type Person struct {
+	name string
+	gender string
+	age int
 }
 
+func main(){
+	var maria *Person = newPerson("maria","female",29)
+	fmt.Println(*maria)
+	maria.transformGender()
+	fmt.Println(*maria)
+}
 
+func newPerson(n,g string, a int) *Person {
+	person := new(Person)
+	person.name = n
+	person.gender = g
+	person.age = a
+	return person
+}
+
+func (p *Person) transformGender() {
+	if p.gender == "male"{
+		p.gender = "female"
+	}else if p.gender == "female"{
+		p.gender = "male"
+	}
+}
