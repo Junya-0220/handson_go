@@ -28,8 +28,12 @@ func (md *MyData) SetValue(vals map[string]string) {
 }
 
 func (md *MyData) PrintData() {
-	fmt.Println("Name: ", md.Name)
-	fmt.Println("Data: ", md.Data)
+	if md != nil {
+		fmt.Println("Name: ", md.Name)
+		fmt.Println("Data: ", md.Data)
+	}else {
+		fmt.Println("** This is Nil value. **")
+	}
 }
 
 type YourData struct {
@@ -51,20 +55,11 @@ func (md *YourData) PrintData() {
 }
 
 func main() {
-	ob := [2]Data{}
-	ob[0] = new(MyData)
-	ob[0].SetValue(map[string]string{
-		"name": "sachiko",
-		"data": "22, 33, 44",
-	})
-	ob[1] = new(YourData)
-	ob[1].SetValue(map[string]string {
-		"name": "mami",
-		"mail": "mami@gmail.com",
-		"age": "45",
-	})
-	for _, d := range ob {
-		d.PrintData()
-		fmt.Println()
-	}
+ var ob *MyData
+ ob.PrintData()
+ ob = &MyData{}
+ ob.SetValue(map[string]string{
+	"name": "Jiro",
+	"data": "123 456 678",
+ })
 }
