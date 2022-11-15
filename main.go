@@ -5,30 +5,46 @@ import "fmt"
 type General interface{}
 
 type GData interface{
-	Set(nm string, g General)
+	Set(nm string, g General) GData
 	Print()
 }
 
-type GDataImpl struct {
+type NData struct {
 	Name string
-	Data General
+	Data int
 }
 
-func (gd *GDataImpl) Set(nm string, g General) {
-	gd.Name = nm
-	gd.Data = g
+func (nd *NData) Set(nm string, g General)GData {
+	nd.Name = nm
+	nd.Data = g.(int)
+	return nd
 }
 
-func (gd *GDataImpl) Print() {
-	fmt.Printf("<%s>",gd.Name)
-	fmt.Println(gd.Data)
+func (nd *NData) Print() {
+	fmt.Printf("<<%s>> value: %d\n", nd.Name, nd.Data)
+}
+
+type SData struct {
+	Name string
+	Data string
+}
+
+func (sd *SData) Set(nm string, g General)GData {
+	sd.Name = nm
+	sd.Data = g.(string)
+	return sd
+}
+
+func (sd *SData) Print() {
+	fmt.Printf("<%s>, <%s>\n",sd.Name,sd.Data)
 }
 
 func main() {
-	var data = []GDataImpl{}
-	data = append(data, GDataImpl{"Taro", 123})
-	data = append(data, GDataImpl{"Hanako", "hello"})
-	data = append(data, GDataImpl{"Sachiko", []int{123,456,789}})
+	var data = []GData{}
+	data = append(data, new(NData).Set("Taro",123))
+	data = append(data, new(SData).Set("J","hell"))
+	data = append(data, new(NData).Set("H",98777))
+	data = append(data, new(SData).Set("S","happ"))
 	for _ , ob := range data {
 		ob.Print()
 	}
