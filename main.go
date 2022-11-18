@@ -1,38 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"strconv"
-	"time"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/widget"
 )
 
-func hello(s string, n int) {
-	for i := 1; i <= 10; i++ {
-		fmt.Printf("<%d %s>", i, s)
-		time.Sleep(time.Duration(n) * time.Millisecond)
-	}
-}
-
 func main() {
-	msg := "start"
-	prmsg := func(nm string, n int) {
-		fmt.Println(nm,msg)
-		time.Sleep(time.Duration(n)* time.Millisecond) 
-	}
-	hello := func(n int) {
-		const nm string = "hello"
-		for i := 0; i < 10; i++ {
-			msg += "h" + strconv.Itoa(i)
-			prmsg(nm,n)
-		}
-	}
-	main := func(n int) {
-		const nm string = "*main"
-		for i := 0; i < 5; i++ {
-			msg += "m" + strconv.Itoa(i)
-			prmsg(nm, 100)
-		}
-	}
-	go hello(60)
-	main(100)
+	a := app.New()
+	w := a.NewWindow("Hello World")
+
+	w.SetContent(widget.NewLabel("Hello World!"))
+	w.ShowAndRun()
 }
