@@ -1,27 +1,19 @@
 package main
 
 import (
-	"log"
+	"fmt"
 
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
-	myApp := app.New()
-	myWindow := myApp.NewWindow("Choice Widgets")
+	fmt.Println("test fyne")
 
-	check := widget.NewCheck("Optional", func(value bool) {
-		log.Println("Check set to", value)
-	})
-	radio := widget.NewRadioGroup([]string{"Option 1", "Option 2"}, func(value string) {
-		log.Println("Radio set to", value)
-	})
-	combo := widget.NewSelect([]string{"Option 1", "Option 2"}, func(value string) {
-		log.Println("Select set to", value)
-	})
+	a := app.New()
 
-	myWindow.SetContent(container.NewVBox(check, radio, combo))
-	myWindow.ShowAndRun()
+	w := a.NewWindow("title") //this is title
+	w.Resize(fyne.NewSize(200,400))
+
+	w.ShowAndRun()// Finally Running our App
 }
