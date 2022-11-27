@@ -1,24 +1,26 @@
 package main
 
 import (
-	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/driver/desktop"
-	"fyne.io/fyne/v2/widget"
+	"strconv"
+
+	"fyne.io/fyne/app"
+	"fyne.io/fyne/widget"
 )
 
 func main() {
+	c := 0
 	a := app.New()
-	w := a.NewWindow("SysTray")
+	w := a.NewWindow("Hello")
+	l := widget.NewLabel("Hello Fyne!")
+	w.SetContent(
+			widget.NewVBox(
+					l,
+					widget.NewButton("Click me!", func() {
+							c++
+							l.SetText("count: " + strconv.Itoa(c))
+					}),
+			),
+	)
 
-	if desk, ok := a.(desktop.App); ok {
-		m := fyne.NewMenu("MyApp",
-			fyne.NewMenuItem("Show", func() {
-				w.Show()
-			}))
-		desk.SetSystemTrayMenu(m)
-	}
-
-	w.SetContent(widget.NewLabel("Fyne system tray"))
 	w.ShowAndRun()
 }
