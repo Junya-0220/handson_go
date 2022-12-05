@@ -1,4 +1,4 @@
-package main
+package paiza
 
 import (
 	"bufio"
@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 )
-func main() {
+func f20221205() {
         sc := bufio.NewScanner(os.Stdin)
 	sc.Scan()
 	s := (sc.Text())

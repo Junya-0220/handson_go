@@ -4,29 +4,30 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
 
 func paiza() {
 	sc := bufio.NewScanner(os.Stdin)
-    var t []string
-    var m []string
+    var t []int
+    var m []int
     
 	for sc.Scan(){
 	    str := sc.Text()
         stringSplited := strings.Split(str, " ")
-        t = append(t,stringSplited[0])
-        m = append(m,stringSplited[1])
+        i1, _ := strconv.Atoi(stringSplited[0])
+        i2, _ := strconv.Atoi(stringSplited[1])
+        t = append(t,i1)
+        m = append(m,i2)
 	}
-	tf1 := fmt.Sprintf("2020-11-01T%s:%s:00+09:00",t[0],m[0])
-	tf2 := fmt.Sprintf("2020-11-01T%s:%s:00+09:00",t[1],m[1])
-	t1, _ := time.Parse(time.RFC3339, tf1)
-	t2, _ := time.Parse(time.RFC3339, tf2)
-    if((t1.Equal(t2)) || (t1.After(t2))){
+    var t1 = time.Date(2022, 4, 1, t[0], m[0], 0, 0, time.Local)
+    var t2 = time.Date(2022, 4, 1, t[1], m[1], 0, 0, time.Local)
+    if ((t1.Equal(t2)) || (t1.After(t2))){
         fmt.Println("Yes")
-    }else if(t1.Before(t2)){
-         fmt.Println("No")
+    }else if((t1.Before(t2))){
+        fmt.Println("No")
     }
 
 }
